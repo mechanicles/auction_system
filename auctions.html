@@ -3,19 +3,18 @@
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
     <title>Auctions System: Simple real time app using node.js and faye.js</title>
     <link rel='stylesheet' type='text/css' href='public/stylesheets/main.css'>
-    <script type="text/javascript" src="http://192.168.2.103:8000/auctions.js"></script>
+    <script type="text/javascript" src="http://localhost:8000/auctions.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.js"></script>
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
     <script type="text/javascript" src="public/javascripts/jquery.numeric.js"></script>
     <script type="text/javascript">
-        bayeux_client = new Faye.Client('http://192.168.2.103:8000/auctions');
+        bayeux_client = new Faye.Client('http://localhost:8000/auctions');
         $(".subscribe_channel").live('click', function(ev){
             bayeux_client.subscribe("/auctions",function(message){
                 $('#current_bid').html(message.bid)
             });
-            seconds = 30;
             $(".positive").numeric({ negative: false }, function() { alert("No negative values"); this.value = ""; this.focus(); });
-            alert('Subscribed');
+            $('.subscribe').html('Subscribed.');
+            $('.subscribe').css('color', 'green');
             $('.input_text').attr('disabled', false);
             $('.submit').attr('disabled', false);
         });
@@ -29,30 +28,53 @@
             }
             else
             {
-                alert('Please enter the valid data');
+                alert('Bidding amount must be greater than current bid amount');
             }
         });
 
+        $(document).ready(function(){
+            $('.input_text').attr('disabled', true);
+            $('.submit').attr('disabled', true);
+        });
+
+        $(".help_link").live('click', function(ev){
+            $('.info').toggle();
+        });
     </script>
 </head>
 <body>
 <div class='container'>
-    <h2 title='Simple real time app'> Auction System <span  class='using'>( Small pub/sub app using <a href='http://nodejs.org'>Node.js</a> and <a href='http://faye.jcoglan.com/'>Faye.js</a> )</span></h2>
+    <h2 title='Simple real time app'> Auction System
+    <span  class='using'>
+      ( Small pub/sub app using <a href='http://nodejs.org'>Node.js</a> and <a href='http://faye.jcoglan.com/'>Faye.js</a> )
+    </span>
+    <span class='help'>
+      <a href='javascript:void(0)' class='help_link'>Help</a>
+    </span>
+    </h2>
     <br/>
+    <div class='info' style='display:none'>
+        First open two browsers and subscribe the channel in both browsers.</li>
+        <br/>
+        Enter the bid amount and see that amount will be reflected to another browser too.</li>
+        </ul>
+    </div>
     <h4 class ='auction_item_title'> Firefox- Target 21 Spd.</h4>
     <div class='auction_item_image'>
         <img src='public/images/firefox-target.png' title='Auction itme: Firefox bike' style="height: 300px">
-        <p class='bid_amount'>Current Bid <b style='background-color:yellow'>$<span id='current_bid'>200</span></b></p>
+        <p class='bid_amount'>Current Bid <b class='yellowBackground'>$<span id='current_bid'>200</span></b></p>
     </div>
     <div class='bid_form'>
         <br/>
-        <p class='subscribe'>
+        <p>
             To start the bidding, first subscribe the firefox channel:
-            <a href='javascript:void(0)' title='Subscribe' id="auction_1_subscribe" class="subscribe_channel" data-auction-id="1">Subscribe</a>
+            <span class='subscribe'>
+            <a href='javascript:void(0)' title='Subscribe' class="subscribe_channel" data-auction-id="1">Subscribe</a>
+            <span>
         </p>
         <br/>
         <form action='javascript:void(0)' method='post'>
-            Enter your bid amount:
+            Enter your bid amount $
             <input type='text' class='input_text positive' disabled='disabled'>
             <input type='submit' class='submit' value='Bid' disabled='disabled'>
         </form>

@@ -26,6 +26,16 @@ body {
   font-size:0.6em;
   font-weight:lighter;
 }
+
+
+.container .help{
+  padding-top:12px !important;
+  float:right !important;
+  color:#cccccc !important; 
+  font-size:0.5em;
+  font-weight:bold;
+}
+
 .container .time{
   float:right;
   font-size:0.8em;
@@ -33,12 +43,17 @@ body {
   color:black;
 }
 
-.auction_item_title{
-
-  margin-top:12px; 
-
-
+.info{
+  padding:4px;
+  font-size:0.8em;
+  border:1px dashed #D3A350;
+  background:#FEEFCB;
 }
+
+.auction_item_title{
+  margin-top:12px; 
+}
+
 .auction_item_image{
   margin:0 auto;
   border:1px dotted #cccccc;
@@ -51,8 +66,12 @@ body {
   margin:0 auto;
 }
 
+.yellowBackground{
+  background-color: yellow;
+}
+
 .footer{
-  margin-top:100px;
+  margin-top:80px;
   padding-top:5px;
   color:black;
   text-align:center;
