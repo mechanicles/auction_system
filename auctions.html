@@ -1,0 +1,65 @@
+<html>
+<head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    <title>Auctions System: Simple real time app using node.js and faye.js</title>
+    <link rel='stylesheet' type='text/css' href='public/stylesheets/main.css'>
+    <script type="text/javascript" src="http://192.168.2.103:8000/auctions.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="public/javascripts/jquery.numeric.js"></script>
+    <script type="text/javascript">
+        bayeux_client = new Faye.Client('http://192.168.2.103:8000/auctions');
+        $(".subscribe_channel").live('click', function(ev){
+            bayeux_client.subscribe("/auctions",function(message){
+                $('#current_bid').html(message.bid)
+            });
+            seconds = 30;
+            $(".positive").numeric({ negative: false }, function() { alert("No negative values"); this.value = ""; this.focus(); });
+            alert('Subscribed');
+            $('.input_text').attr('disabled', false);
+            $('.submit').attr('disabled', false);
+        });
+
+        $(".submit").live('click', function(ev){
+            var entered_bid = $('.input_text').val();
+            current_bid =$('#current_bid').html();
+            if(parseInt(entered_bid) > parseInt(current_bid))
+            {
+                bayeux_client.publish("/auctions", {bid: entered_bid});
+            }
+            else
+            {
+                alert('Please enter the valid data');
+            }
+        });
+
+    </script>
+</head>
+<body>
+<div class='container'>
+    <h2 title='Simple real time app'> Auction System <span  class='using'>( Small pub/sub app using <a href='http://nodejs.org'>Node.js</a> and <a href='http://faye.jcoglan.com/'>Faye.js</a> )</span></h2>
+    <br/>
+    <h4 class ='auction_item_title'> Firefox- Target 21 Spd.</h4>
+    <div class='auction_item_image'>
+        <img src='public/images/firefox-target.png' title='Auction itme: Firefox bike' style="height: 300px">
+        <p class='bid_amount'>Current Bid <b style='background-color:yellow'>$<span id='current_bid'>200</span></b></p>
+    </div>
+    <div class='bid_form'>
+        <br/>
+        <p class='subscribe'>
+            To start the bidding, first subscribe the firefox channel:
+            <a href='javascript:void(0)' title='Subscribe' id="auction_1_subscribe" class="subscribe_channel" data-auction-id="1">Subscribe</a>
+        </p>
+        <br/>
+        <form action='javascript:void(0)' method='post'>
+            Enter your bid amount:
+            <input type='text' class='input_text positive' disabled='disabled'>
+            <input type='submit' class='submit' value='Bid' disabled='disabled'>
+        </form>
+    </div>
+    <div class='footer'>
+        © 2011 <a href='http://mechanicles.com' title='http://mechanicles.com'>Santosh Wadghule</a>
+    </div>
+</div>
+</body>
+</html>
