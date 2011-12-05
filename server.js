@@ -6,5 +6,4 @@ var server = new faye.NodeAdapter({
 });
 
 server.listen(8000);
-
-
+console.log('Server has started...');

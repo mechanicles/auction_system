@@ -7,9 +7,9 @@
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.js"></script>
     <script type="text/javascript" src="public/javascripts/jquery.numeric.js"></script>
     <script type="text/javascript">
-        bayeux_client = new Faye.Client('http://localhost:8000/auctions');
+        client = new Faye.Client('http://localhost:8000/auctions');
         $(".subscribe_channel").live('click', function(ev){
-            bayeux_client.subscribe("/auctions",function(message){
+            client.subscribe("/auctions",function(message){
                 $('#current_bid').html(message.bid)
             });
             $(".positive").numeric({ negative: false }, function() { alert("No negative values"); this.value = ""; this.focus(); });
@@ -24,7 +24,7 @@
             current_bid =$('#current_bid').html();
             if(parseInt(entered_bid) > parseInt(current_bid))
             {
-                bayeux_client.publish("/auctions", {bid: entered_bid});
+                client.publish("/auctions", {bid: entered_bid});
             }
             else
             {
