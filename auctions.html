@@ -9,7 +9,7 @@
     <script type="text/javascript">
         client = new Faye.Client('http://localhost:8000/auctions');
         $(".subscribe_channel").live('click', function(ev){
-            client.subscribe("/auctions",function(message){
+            client.subscribe("/bids",function(message){
                 $('#current_bid').html(message.bid)
             });
             $(".positive").numeric({ negative: false }, function() { alert("No negative values"); this.value = ""; this.focus(); });
@@ -24,7 +24,7 @@
             current_bid =$('#current_bid').html();
             if(parseInt(entered_bid) > parseInt(current_bid))
             {
-                client.publish("/auctions", {bid: entered_bid});
+                client.publish("/bids", {bid: entered_bid});
             }
             else
             {
@@ -46,13 +46,12 @@
 <div class='container'>
     <h2 title='Simple real time app'> Auction System
     <span  class='using'>
-      ( Small pub/sub app using <a href='http://nodejs.org'>Node.js</a> and <a href='http://faye.jcoglan.com/'>Faye.js</a> )
+      Small pub/sub app using <a href='http://nodejs.org'>Node.js</a> and <a href='http://faye.jcoglan.com/'>Faye</a>
     </span>
     <span class='help'>
       <a href='javascript:void(0)' class='help_link'>Help</a>
     </span>
     </h2>
-    <br/>
     <div class='info' style='display:none'>
         First open two browsers and subscribe the channel in both browsers.</li>
         <br/>

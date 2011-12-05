@@ -4,7 +4,7 @@
 }
 
 body {
-  font-family:Helvetica Neue,Arial,sans-serif; 
+  font-family:Helvetica,Arial,sans-serif; 
 }
 
 .container{
@@ -12,7 +12,6 @@ body {
   margin:0 auto;
 
 }
-
 
 .container h2{
   color:#FF0084; 
@@ -44,14 +43,15 @@ body {
 }
 
 .info{
+  margin-top:8px; 
   padding:4px;
   font-size:0.8em;
-  border:1px dashed #D3A350;
+  border:1px dotted #D3A350;
   background:#FEEFCB;
 }
 
 .auction_item_title{
-  margin-top:12px; 
+  margin-top:14px; 
 }
 
 .auction_item_image{
@@ -77,5 +77,4 @@ body {
   text-align:center;
   font-size:0.8em;
   border-top:1px dashed #FF0084;
-
 }
