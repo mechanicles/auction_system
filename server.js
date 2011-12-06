@@ -5,5 +5,5 @@ var server = new faye.NodeAdapter({
   timeout: 45
 });
 
-server.listen(8000);
+server.listen(12854);
 console.log('Server has started...');
