@@ -1,13 +1,13 @@
 <html>
 <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8">
-    <title>Auctions System: Simple real time app using node.js and faye.js</title>
+    <title>Auctions System: Simple real time app using nodejs, faye and express</title>
     <link rel='stylesheet' type='text/css' href='public/stylesheets/main.css'>
-    <script type="text/javascript" src="http://localhost:8000/auctions.js"></script>
+    <script type="text/javascript" src="http://auction_system.nodester.com/auctions.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.0/jquery.js"></script>
     <script type="text/javascript" src="public/javascripts/jquery.numeric.js"></script>
     <script type="text/javascript">
-        client = new Faye.Client('http://localhost:8000/auctions');
+        client = new Faye.Client('http://auction_system.nodester.com/auctions');
         $(".subscribe_channel").live('click', function(ev){
             client.subscribe("/bids",function(message){
                 $('#current_bid').html(message.bid)
