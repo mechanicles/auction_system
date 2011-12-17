@@ -12,5 +12,5 @@ Simple real time pub/sub app using node.js and faye for bidding system.
 - [Express](http://expressjs.com/) -(Optional)
 
 ##Thanks
-- [Nodester](http://nodester.com/, "Free nodejs app hosting") - Free
+- [Nodester](http://nodester.com/) - Free
   nodejs app hosting
