@@ -9,7 +9,7 @@ Simple real time pub/sub app using node.js and faye for bidding system.
 - [Nodejs](http://nodejs.org/)
 - [npm](http://npmjs.org/) - Package manager for node
 - [Faye](http://faye.jcoglan.com/)
-- [Express](http://expressjs.com/) -(Optional)
+- [Express](http://expressjs.com/) - (Optional)
 
 ##Thanks
 - [Nodester](http://nodester.com/) - Free
